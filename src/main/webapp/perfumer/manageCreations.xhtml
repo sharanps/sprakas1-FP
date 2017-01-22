@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/portalTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="metadata">
+    </ui:define>
+
+    <ui:define name="title">
+        Manage Creation #{not empty creationBean.creation.id ? creationBean.creation.creationName :"Create Creation"}
+    </ui:define>
+
+    <ui:define name="dropdown">
+        <h:form>
+            <h:commandLink action="#{loginBean.goHome()}" value="Home"/>
+        </h:form>
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form>
+            <h:commandLink action="#{loginBean.goHome()}" value="Home"/>
+        </h:form>
+        <div class="row">
+            <div class="large-6 columns">
+                <h4>Creation Composition</h4>
+                <h:dataTable value="#{creationBean.compositionMap.entrySet().toArray()}" var="map">
+                    <h:column>
+                        <f:facet name="header"><h:outputText value="ID"/></f:facet>
+                        <h:outputText value="#{map.key.id}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header"><h:outputText value="Name"/></f:facet>
+                        <h:outputText value="#{map.key.ingredientName}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header"><h:outputText value="Quantity"/></f:facet>
+                        <h:outputText value="#{map.value}"/>
+                    </h:column>
+                    <h:column>
+                        <h:form>
+                            <f:facet name="header"><h:outputText value="New Quantity"/></f:facet>
+                            <h:inputText p:placeholder="New Quantity" id="quantity" value="#{creationBean.quantity}" required="true" label="Quantity"/>
+                            <f:facet name="header">Edit </f:facet>
+                            <h:commandLink action="#{creationBean.editCreation(map.key,quantity)}" value=" Edit the ingredient " />
+                        </h:form>
+                    </h:column>
+                    <h:column>
+                        <h:form>
+                        <f:facet name="header">Delete </f:facet>
+                        <h:commandLink action="#{creationBean.deleteIngredient(map.key)}" value=" Delete "/>
+                        </h:form>
+                    </h:column>
+                </h:dataTable>
+            </div>
+            <div class="large-6 columns">
+                <h4>List of Ingredients that can be added</h4>
+                <h:dataTable value="#{creationBean.allIngredients}" var="ingredient">
+                    <h:column>
+                        <f:facet name="header"><h:outputText value="ID"/></f:facet>
+                        <h:outputText value="#{ingredient.id}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header"><h:outputText value="Name"/></f:facet>
+                        <h:outputText value="#{ingredient.ingredientName}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header"><h:outputText value="Price"/></f:facet>
+                        <h:outputText value="#{ingredient.price}"/>
+                    </h:column>
+                    <h:column>
+                        <h:form>
+                            <f:facet name="header"><h:outputText value="Quantity"/></f:facet>
+                            <h:inputText p:placeholder="Quantity" id="quantity" value="#{creationBean.addQuantity}" required="true" label="Quantity"/>                        
+                            <h:commandLink action="#{creationBean.addIngredient(ingredient)}" value="Add"/>
+                        </h:form>
+                    </h:column>
+                </h:dataTable>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/portalTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="metadata">
+        metadata
+    </ui:define>
+
+    <ui:define name="title">
+        Composition Management
+    </ui:define>
+
+    <ui:define name="dropdown">
+
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form>
+            <div class="row">
+                <div class="large-6 columns">
+                    <h:outputLabel for="id" value="Ingredient ID #{creationBean.ingredient.id}"  />
+                    <h:inputHidden id="id" value="#{creationBean.ingredient.id}" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-6 columns">
+                    <h:outputLabel for="name" value="Name" />
+                    <h:inputHidden id="name" value="#{creationBean.ingredient.ingredientName}" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-6 columns">
+                    <h:outputLabel for="quantity" value="Quantity" />
+                    <h:inputText p:placeholder="Quantity" id="quantity" value="#{creationBean.quantity}" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-6 columns">
+                    <h:commandButton action="#{creationBean.addIngredient()}" class="button expand" value="Save"/>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

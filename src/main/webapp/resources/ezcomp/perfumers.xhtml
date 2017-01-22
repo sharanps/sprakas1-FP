@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="perfumer" type="java.util.List" required="true"/>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <h3>List of Current Users</h3>
+        <h:dataTable value="#{cc.attrs.perfumer}" var="per">
+            <h:column>
+                <f:facet name="header"><h:outputText value="ID"/></f:facet>
+                <h:outputText value="#{per.id}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header"><h:outputText value="User Name"/></f:facet>
+                <h:outputText value="#{per.firstName}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header"><h:outputText value="Last Name"/></f:facet>
+                <h:outputText value="#{per.lastName}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header"><h:outputText value="City"/></f:facet>
+                <h:outputText value="#{per.city}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header"><h:outputText value="Email"/></f:facet>
+                <h:outputText value="#{per.email}"/>
+            </h:column>
+        </h:dataTable>
+    </cc:implementation>
+</html>

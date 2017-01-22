@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/portalTemplate.xhtml">
+
+            <ui:define name="metadata">
+            </ui:define>
+
+            <ui:define name="title">
+                #{not empty ingredientBean.ingredient.id ? "Update Ingredient": "Create Ingredient"}
+            </ui:define>
+
+            <ui:define name="dropdown">
+                <h:commandLink action="#{loginBean.goHome()}" value="Home"/>
+            </ui:define>
+
+            <ui:define name="body">
+                <h:form>
+                    <h:column>
+                        <h:commandLink action="#{loginBean.viewIngredients()}" value="Back to All Ingredient"/>
+                    </h:column>
+                </h:form>
+                <h:form>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <h:outputLabel for="id" value="Ingredient ID #{ingredientBean.ingredient.id}" rendered="#{not empty ingredientBean.ingredient.id}" />
+                            <h:inputHidden id="id" value="#{ingredientBean.ingredient.id}" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <h:outputLabel for="name" value="Name" />
+                            <h:inputText p:placeholder="Ingredient Name" id="name" value="#{ingredientBean.ingredient.ingredientName}" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <h:outputLabel for="price" value="Price" />
+                            <h:inputText p:placeholder="Ingredient Price" id="price" value="#{ingredientBean.ingredient.price}" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <h:outputLabel for="supplier" value="Supplier" />
+                            
+<!--                            <h:selectOneListbox id="supplier"  value="#{ingredientBean.supplier.id}" rendered="#{not empty ingredientBean.ingredient.id}">
+                                <f:selectItems value="#{supplierService.findSupplierByIngredient(ingredientBean.ingredient.id)}" var="suppliers" itemLabel="#{suppliers.supplierName}" itemValue="#{suppliers.id}"/>
+                            </h:selectOneListbox>-->
+                            
+                            <h:selectOneListbox id="allSupplier"  value="#{ingredientBean.supplier.id}" >
+                                <f:selectItems value="#{supplierService.findAll()}" var="suppliers1" itemLabel="#{suppliers1.supplierName}" itemValue="#{suppliers1.id}"/>
+                            </h:selectOneListbox>
+                        
+                        </div>
+                    </div>      
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <h:commandButton action="#{ingredientBean.executeSave()}" class="button expand" value="Save"/>
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>
